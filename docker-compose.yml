@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  recipe-service:
+    build: .
+    container_name: recipe-service
+    ports:
+      - "8080:8080"
+    restart: always
+    depends_on:
+      - mongodb
+  mongodb:
+    image: mongo
+    container_name: mongodb-recipe-db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root
+    ports:
+      - "27017:27017"
+    volumes:
+      - /home/recipe2/Docker/volume/mongoDB:/data/db
+    restart: always
